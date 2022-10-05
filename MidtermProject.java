@@ -10,27 +10,27 @@ public class MidtermProject
         String name = input.nextLine();
 
         System.out.println("Pick a class from among the ones availble: " + "\nWizard (W), Swordsman (S), Rogue (R), or Bard (R)");
-        char pickClass = input.nextcharacter();
+        char pickClass = input.next().charAt(0);
 
-        if( pickClass == W)
+        if( pickClass == 'W')
         {
             int playerMaxHealth = 10;
             int playerMaxMana = 25;
             int playerAttack = 5;
         }
-        else if (pickClass == S)
+        else if (pickClass == 'S')
         {
             int playerMaxHealth = 10;
             int playerMaxMana = 25;
             int playerAttack = 5;
         }
-        else if (pickClass == R)
+        else if (pickClass == 'R')
         {
             int playerMaxHealth = 10;
             int playerMaxMana = 25;
             int playerAttack = 5;
         }
-        else if (pickClass == B)
+        else if (pickClass == 'B')
         {
             int playerMaxHealth = 10;
             int playerMaxMana = 25;
