@@ -1,7 +1,6 @@
 import java.util.Scanner;
 public class MidtermProject
 {
-
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
@@ -9,7 +8,7 @@ public class MidtermProject
         System.out.println("Hello and welcome to our game!" + "Please enter your name");
         String name = input.nextLine();
 
-        System.out.println("Pick a class from among the ones availble: " + "\nWizard (W), Swordsman (S), Rogue (R), or Bard (R)");
+        System.out.println("Pick a class from among the ones available: " + "\nWizard (W), Swordsman (S), Rogue (R), or Bard (R)");
         char pickClass = input.next().charAt(0);
 
         if( pickClass == 'W')

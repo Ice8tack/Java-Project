@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Player
+comment1.params=playerClassChar
+comment1.target=Player(char)
+comment2.params=playerClassChar
+comment2.target=void\ setStats(char)
+comment3.params=
+comment3.target=int\ getMaxHealth()
+comment4.params=
+comment4.target=int\ getMaxMana()
+comment5.params=
+comment5.target=int\ getAttackDamage()
+numComments=6
