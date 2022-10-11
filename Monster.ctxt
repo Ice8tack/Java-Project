@@ -1,0 +1,5 @@
+#BlueJ class context
+comment0.target=Monster
+comment1.params=health\ damage
+comment1.target=Monster(int,\ int)
+numComments=2
