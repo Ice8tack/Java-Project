@@ -8,6 +8,24 @@ public class MidtermProject
         return false;
     }
     
+    public static char playerChoice(char choice, int maxHealth, int attackDamage) //Need to pass player health, monster health, player dmg, and monster dmg in here as well
+    {
+        int doBattle; 
+        System.out.println("You encounter a creature before you and you go in and attack.");
+        while(maxHealth > 0 && monsterHealth > 0)
+        {
+            int playerTakenBattleDmg = maxHealth - monsterDamage;
+            int monsterTakenBattleDmg = monsterHealth - attackDamage;
+            
+            if (maxHealth < 0 || monsterHealth < 0)
+            {
+                String battle = "over";
+            }
+            
+            System.out.printf("After taking an attack, your current health is %d %n", playerTakenBattleDmg);
+        }
+    }
+    
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
