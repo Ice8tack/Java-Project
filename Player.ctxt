@@ -10,4 +10,6 @@ comment4.params=
 comment4.target=int\ getMaxMana()
 comment5.params=
 comment5.target=int\ getAttackDamage()
-numComments=6
+comment6.params=enemy
+comment6.target=void\ attack(Monster)
+numComments=7

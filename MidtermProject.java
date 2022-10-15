@@ -7,25 +7,63 @@ public class MidtermProject
         }
         return false;
     }
-    
-    public static char playerChoice(char choice, int maxHealth, int attackDamage) //Need to pass player health, monster health, player dmg, and monster dmg in here as well
+
+    /*public static char playerChoice(char choice, int maxHealth, int attackDamage) //Need to pass player health, monster health, player dmg, and monster dmg in here as well
     {
-        int doBattle; 
-        System.out.println("You encounter a creature before you and you go in and attack.");
-        while(maxHealth > 0 && monsterHealth > 0)
-        {
-            int playerTakenBattleDmg = maxHealth - monsterDamage;
-            int monsterTakenBattleDmg = monsterHealth - attackDamage;
-            
-            if (maxHealth < 0 || monsterHealth < 0)
-            {
-                String battle = "over";
-            }
-            
-            System.out.printf("After taking an attack, your current health is %d %n", playerTakenBattleDmg);
-        }
+    int doBattle; 
+    System.out.println("You encounter a creature before you and you go in and attack.");
+    while(maxHealth > 0 && monsterHealth > 0)
+    {
+    int playerTakenBattleDmg = maxHealth - monsterDamage;
+    int monsterTakenBattleDmg = monsterHealth - attackDamage;
+
+    if (maxHealth < 0 || monsterHealth < 0)
+    {
+    String battle = "over";
+    }
+
+    System.out.printf("After taking an attack, your current health is %d %n", playerTakenBattleDmg);
+    }
+    }*/
+
+    public static void printVitals(int playerHealth, Monster enemy){
+        System.out.printf("You currently have %d health remaining!%n",playerHealth);
+        System.out.printf("%s currently has %d health remaining!%n",enemy.name,enemy.currentHealth);
     }
     
+    public static void chooseBattleOption(Player user, Monster enemy, Scanner input){
+        System.out.println("What will you do?");
+        System.out.println("Options: Attack, Magic");
+        String playerBattleOption = input.nextLine();
+        while (!playerBattleOption.equalsIgnoreCase("attack") && !playerBattleOption.equalsIgnoreCase("magic")){
+            System.out.println("Invalid Input.");
+            playerBattleOption = input.nextLine();
+        }
+        if (playerBattleOption.equalsIgnoreCase("attack")){
+            user.attack(enemy);
+            System.out.printf("You strike %s for %d damage!%n",enemy.getName(),user.getAttackDamage());
+        }
+    }
+
+    public static boolean doBattle(Player user, Monster enemy, Scanner input){
+        int playerHealth = user.getMaxHealth();
+        int playerMana = user.getMaxMana();
+        System.out.printf("%s approaches!%n",enemy.name);
+        while (playerHealth > 0 && enemy.currentHealth > 0){
+            printVitals(playerHealth,enemy);
+            chooseBattleOption(user,enemy, input);
+            System.out.printf("%s attacks you for %d damage!%n",enemy.getName(),enemy.getAttackDamage());
+            playerHealth -= enemy.getAttackDamage();
+        }
+        if (playerHealth <= 0 && enemy.currentHealth <= 0){
+            System.out.println("Using the last bit of your energy, you strike down your foe!");
+        }
+        if (playerHealth >= 0){
+            return true;
+        }
+        return false;
+    }
+
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
@@ -40,7 +78,33 @@ public class MidtermProject
             pickClass = input.next().charAt(0);
         }
         Player user = new Player(pickClass);
-        //Monster goblin = new Monster(10,3);
+        Monster goblin = new Monster(15,3,"Boblin the Goblin");
+        Monster orc = new Monster(25,5,"Gork the Orc");
+        Monster minotaur = new Monster(30,7,"Midas the Minotaur");
+        
+        if (doBattle(user,goblin,input)){
+            System.out.printf("You win!! Now for your next opponent...%n%n");
+        } else {
+            System.out.println("You die.. :(");
+            input.close();
+            return;
+        }
+        
+        if (doBattle(user,orc,input)){
+            System.out.printf("You win!! Now for your next opponent...%n%n");
+        } else {
+            System.out.println("You die.. :(");
+            input.close();
+            return;
+        }
+        
+        if (doBattle(user,minotaur,input)){
+            System.out.printf("YOU ARE WINNER!! CONGRATULATION!!");
+        } else {
+            System.out.println("You die.. And so close, too! Try again?");
+            input.close();
+            return;
+        }
         
         input.close();
     }

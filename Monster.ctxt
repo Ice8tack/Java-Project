@@ -1,5 +1,12 @@
 #BlueJ class context
 comment0.target=Monster
-comment1.params=health\ damage
-comment1.target=Monster(int,\ int)
-numComments=2
+comment1.params=health\ damage\ n
+comment1.target=Monster(int,\ int,\ java.lang.String)
+comment2.params=
+comment2.target=int\ getMaxHealth()
+comment2.text=if(\ playerClassChar\ \=\=\ goblin)\ \ \ //This\ is\ just\ put\ in\ for\ stat\ reasons\ and\ can\ be\ fixed\ later\ for\ actually\ inplementing\ the\ monsters\ correctly\r\n\ \ \ \ {\ \ \ //Goblin\ Monster\r\n\ \ \ \ maxHealth\ \=\ 15;\r\n\ \ \ \ attackDamage\ \=\ 3;\r\n\ \ \ \ }\r\n\ \ \ \ else\ if\ (playerClassChar\ \=\=\ orc)\ //Orc\ Monster\r\n\ \ \ \ {\r\n\ \ \ \ maxHealth\ \=\ 25;\r\n\ \ \ \ attackDamage\ \=\ 5;\r\n\ \ \ \ }\r\n\ \ \ \ else\ if\ (playerClassChar\ \=\=\ IFORGETTHE3RDMONSTER)\ //I\ don't\ remember\ what\ we\ were\ going\ to\ do\ for\ the\ 3rd\ monster\ so\ I\ just\ put\ some\ numbers\ down\r\n\ \ \ \ {\r\n\ \ \ \ maxHealth\ \=\ 30;\r\n\ \ \ \ attackDamage\ \=\ 7;\r\n\ \ \ \ }\r\n
+comment3.params=
+comment3.target=int\ getAttackDamage()
+comment4.params=
+comment4.target=java.lang.String\ getName()
+numComments=5

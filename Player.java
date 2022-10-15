@@ -44,4 +44,8 @@ public class Player{
     public int getAttackDamage(){
         return attackDamage;
     }
+    
+    public void attack(Monster enemy){
+         enemy.currentHealth -= attackDamage;
+    }
 }
