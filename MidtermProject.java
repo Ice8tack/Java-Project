@@ -26,12 +26,12 @@ public class MidtermProject
     }
     }*/
 
-    public static void printVitals(int playerHealth, Monster enemy){
-        System.out.printf("You currently have %d health remaining!%n",playerHealth);
+    public static void printVitals(int playerHealth, int playerMana, Monster enemy){
+        System.out.printf("You currently have %d health remaining, and %d mana remaining!%n",playerHealth,playerMana);
         System.out.printf("%s currently has %d health remaining!%n",enemy.name,enemy.currentHealth);
     }
     
-    public static void chooseBattleOption(Player user, Monster enemy, Scanner input){
+    public static int chooseBattleOption(Player user, Monster enemy, Scanner input, int playerMana){
         System.out.println("What will you do?");
         System.out.println("Options: Attack, Magic");
         String playerBattleOption = input.nextLine();
@@ -43,6 +43,16 @@ public class MidtermProject
             user.attack(enemy);
             System.out.printf("You strike %s for %d damage!%n",enemy.getName(),user.getAttackDamage());
         }
+        if (playerBattleOption.equalsIgnoreCase("magic")){
+            if (playerMana > 14){
+                user.magic(enemy);
+                System.out.printf("You magically strike %s for %d damage!%n",enemy.getName(),user.getMagicDamage());
+                return 15; // Mana spent for ability. TODO: Build magic into player?
+            } else {
+                System.out.println("The magic fizzles. Your mana supply is dry. (15 Mana required for Magic)");
+            }
+        }
+        return 0;
     }
 
     public static boolean doBattle(Player user, Monster enemy, Scanner input){
@@ -50,13 +60,24 @@ public class MidtermProject
         int playerMana = user.getMaxMana();
         System.out.printf("%s approaches!%n",enemy.name);
         while (playerHealth > 0 && enemy.currentHealth > 0){
-            printVitals(playerHealth,enemy);
-            chooseBattleOption(user,enemy, input);
+            playerHealth += user.getHPRegen();
+            playerMana += user.getManaRegen();
+            if (playerHealth > user.getMaxHealth()){
+                playerHealth = user.getMaxHealth();
+            }
+            if (playerMana > user.getMaxMana()){
+                playerMana = user.getMaxMana();
+            }
+            
+            printVitals(playerHealth,playerMana,enemy);
+            
+            playerMana -= chooseBattleOption(user,enemy, input, playerMana);
             System.out.printf("%s attacks you for %d damage!%n",enemy.getName(),enemy.getAttackDamage());
             playerHealth -= enemy.getAttackDamage();
         }
         if (playerHealth <= 0 && enemy.currentHealth <= 0){
             System.out.println("Using the last bit of your energy, you strike down your foe!");
+            return true;
         }
         if (playerHealth >= 0){
             return true;

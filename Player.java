@@ -1,7 +1,11 @@
 public class Player{
-    int maxHealth;
-    int maxMana;
-    int attackDamage;
+    private int maxHealth;
+    private int maxMana;
+    private int attackDamage;
+    private int magicDamage = 7;
+    private int manaRegen = 4;
+    private int healthRegen = 0;
+    
     public Player(char playerClassChar){
         setStats(playerClassChar);
     }
@@ -12,12 +16,15 @@ public class Player{
             maxHealth = 15;
             maxMana = 40;
             attackDamage = 3;
+            magicDamage = 10;
+            manaRegen = 7;
         }
         else if (playerClassChar == 'S') //Swordsman class
         {
             maxHealth = 25;
             maxMana = 20;
             attackDamage = 5;
+            healthRegen = 2;
         }
         else if (playerClassChar == 'R') //Rogue class
         {
@@ -30,6 +37,9 @@ public class Player{
             maxHealth = 18;
             maxMana = 30;
             attackDamage = 4;
+            magicDamage = 8;
+            healthRegen = 1;
+            manaRegen = 6;
         }
     }
     
@@ -45,7 +55,23 @@ public class Player{
         return attackDamage;
     }
     
+    public int getMagicDamage(){
+        return magicDamage;
+    }
+    
+    public int getHPRegen(){
+        return healthRegen;
+    }
+    
+    public int getManaRegen(){
+        return manaRegen;
+    }
+    
     public void attack(Monster enemy){
-         enemy.currentHealth -= attackDamage;
+         enemy.currentHealth -= getAttackDamage();
+    }
+    
+    public void magic(Monster enemy){
+         enemy.currentHealth -= getMagicDamage();
     }
 }
