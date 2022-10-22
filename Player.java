@@ -20,10 +20,10 @@ public class Player{
         if(potionCount >= 1)
             {
                 rest();
-                System.out.print("You used a full restore potion. You no have 0 potions");
+                System.out.printf("You used a full restore potion. You now have %d potions",potionCount);
                 potionCount -= 1;
             } else {
-                System.out.print("You have no remaining potions");
+                System.out.println("You scramble for a potion and find none. You're open for attack.");
             }
     }
     
@@ -123,10 +123,10 @@ public class Player{
     }
     
     public void attack(Monster enemy){
-         enemy.currentHealth -= getAttackDamage();
+         enemy.takeDamage(getAttackDamage());
     }
     
     public void magic(Monster enemy){
-         enemy.currentHealth -= getMagicDamage();
+         enemy.takeDamage(getMagicDamage());
     }
 }

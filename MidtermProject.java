@@ -28,7 +28,7 @@ public class MidtermProject
 
     public static void printVitals(int playerHealth, int playerMana, Monster enemy){
         System.out.printf("You currently have %d health remaining, and %d mana remaining!%n",playerHealth,playerMana);
-        System.out.printf("%s currently has %d health remaining!%n",enemy.name,enemy.currentHealth);
+        System.out.printf("%s currently has %d health remaining!%n",enemy.getName(),enemy.getCurrentHealth());
     }
     
     public static void chooseBattleOption(Player user, Monster enemy, Scanner input){
@@ -64,18 +64,19 @@ public class MidtermProject
 
     public static boolean doBattle(Player user, Monster enemy, Scanner input){
         user.rest();
-        System.out.printf("%s approaches!%n",enemy.name);
-        while (user.getCurrentHealth() > 0 && enemy.currentHealth > 0){
+        System.out.printf("%s approaches!%n",enemy.getName());
+        while (user.getCurrentHealth() > 0 && enemy.getCurrentHealth() > 0){
             user.regenStats();
             
             printVitals(user.getCurrentHealth(),user.getCurrentMana(),enemy);
             
             //playerMana -= chooseBattleOption(user,enemy, input, playerMana);
             chooseBattleOption(user, enemy, input);
+            enemy.printAttackDescription();
             System.out.printf("%s attacks you for %d damage!%n",enemy.getName(),enemy.getAttackDamage());
             user.adjustHealth(-enemy.getAttackDamage());
         }
-        if (user.getCurrentHealth() <= 0 && enemy.currentHealth <= 0){
+        if (user.getCurrentHealth() <= 0 && enemy.getCurrentHealth() <= 0){
             System.out.println("Using the last bit of your energy, you strike down your foe!");
             return true;
         }
@@ -96,7 +97,7 @@ public class MidtermProject
 
         System.out.println("Pick a class from among the ones available: " + "\nWizard (W), Swordsman (S), Rogue (R), or Bard (B)");
         String pickClass = input.nextLine();
-        pickClass.toUpperCase();
+        pickClass = pickClass.toUpperCase();
         char classSelect = pickClass.charAt(0);
         while (!isClassValid(classSelect)){
             System.out.println("Invalid class selection. Please select an available class.");
@@ -105,9 +106,9 @@ public class MidtermProject
             classSelect = pickClass.charAt(0);
         }
         Player user = new Player(classSelect);
-        Monster goblin = new Monster(15,3,"Boblin the Goblin");
-        Monster orc = new Monster(25,5,"Gork the Orc");
-        Monster minotaur = new Monster(30,7,"Midas the Minotaur");
+        Monster goblin = new Monster(15,3,"Boblin the Goblin","A muttering of frustration.");
+        Monster orc = new Monster(25,5,"Gork the Orc","Galumphing rage.");
+        Monster minotaur = new Monster(30,7,"Midas the Minotaur","He hit you where it hurts.");
         
         if (doBattle(user,goblin,input)){
             System.out.printf("You win!! Now for your next opponent...%n%n");
