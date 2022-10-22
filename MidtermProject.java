@@ -31,11 +31,11 @@ public class MidtermProject
         System.out.printf("%s currently has %d health remaining!%n",enemy.name,enemy.currentHealth);
     }
     
-    public static int chooseBattleOption(Player user, Monster enemy, Scanner input, int playerMana){
+    public static void chooseBattleOption(Player user, Monster enemy, Scanner input){
         System.out.println("What will you do?");
-        System.out.println("Options: Attack, Magic");
+        System.out.println("Options: Attack, Magic, Item, Quit");
         String playerBattleOption = input.nextLine();
-        while (!playerBattleOption.equalsIgnoreCase("attack") && !playerBattleOption.equalsIgnoreCase("magic")){
+        while (!playerBattleOption.equalsIgnoreCase("attack") && !playerBattleOption.equalsIgnoreCase("magic") && !playerBattleOption.equalsIgnoreCase("item") && !playerBattleOption.equalsIgnoreCase("quit")){
             System.out.println("Invalid Input.");
             playerBattleOption = input.nextLine();
         }
@@ -44,42 +44,42 @@ public class MidtermProject
             System.out.printf("You strike %s for %d damage!%n",enemy.getName(),user.getAttackDamage());
         }
         if (playerBattleOption.equalsIgnoreCase("magic")){
-            if (playerMana > 14){
+            if (user.getCurrentMana() > 14){
                 user.magic(enemy);
                 System.out.printf("You magically strike %s for %d damage!%n",enemy.getName(),user.getMagicDamage());
-                return 15; // Mana spent for ability. TODO: Build magic into player?
+                user.adjustMana(-15);
             } else {
                 System.out.println("The magic fizzles. Your mana supply is dry. (15 Mana required for Magic)");
             }
         }
-        return 0;
+        if (playerBattleOption.equalsIgnoreCase("item")){
+            user.usePotion();
+        }
+        if(playerBattleOption.equalsIgnoreCase("quit")){
+            System.exit(0);
+            System.out.print("You have quit the game. Goodbye");
+        }
     }
 
+
     public static boolean doBattle(Player user, Monster enemy, Scanner input){
-        int playerHealth = user.getMaxHealth();
-        int playerMana = user.getMaxMana();
+        user.rest();
         System.out.printf("%s approaches!%n",enemy.name);
-        while (playerHealth > 0 && enemy.currentHealth > 0){
-            playerHealth += user.getHPRegen();
-            playerMana += user.getManaRegen();
-            if (playerHealth > user.getMaxHealth()){
-                playerHealth = user.getMaxHealth();
-            }
-            if (playerMana > user.getMaxMana()){
-                playerMana = user.getMaxMana();
-            }
+        while (user.getCurrentHealth() > 0 && enemy.currentHealth > 0){
+            user.regenStats();
             
-            printVitals(playerHealth,playerMana,enemy);
+            printVitals(user.getCurrentHealth(),user.getCurrentMana(),enemy);
             
-            playerMana -= chooseBattleOption(user,enemy, input, playerMana);
+            //playerMana -= chooseBattleOption(user,enemy, input, playerMana);
+            chooseBattleOption(user, enemy, input);
             System.out.printf("%s attacks you for %d damage!%n",enemy.getName(),enemy.getAttackDamage());
-            playerHealth -= enemy.getAttackDamage();
+            user.adjustHealth(-enemy.getAttackDamage());
         }
-        if (playerHealth <= 0 && enemy.currentHealth <= 0){
+        if (user.getCurrentHealth() <= 0 && enemy.currentHealth <= 0){
             System.out.println("Using the last bit of your energy, you strike down your foe!");
             return true;
         }
-        if (playerHealth >= 0){
+        if (user.getCurrentHealth() >= 0){
             return true;
         }
         return false;
@@ -89,16 +89,22 @@ public class MidtermProject
     {
         Scanner input = new Scanner(System.in);
 
-        System.out.println("Hello and welcome to our game! Please enter your name");
+        System.out.println("They took everything, \nAnd now you are here. \nNow go there, \nThey are not your friends, \nThey are not like you.");
+
+        System.out.println("\nWho are you and what do you want?");
         String name = input.nextLine();
 
         System.out.println("Pick a class from among the ones available: " + "\nWizard (W), Swordsman (S), Rogue (R), or Bard (B)");
-        char pickClass = input.next().charAt(0);
-        while (!isClassValid(pickClass)){
+        String pickClass = input.nextLine();
+        pickClass.toUpperCase();
+        char classSelect = pickClass.charAt(0);
+        while (!isClassValid(classSelect)){
             System.out.println("Invalid class selection. Please select an available class.");
-            pickClass = input.next().charAt(0);
+            pickClass = input.nextLine();
+            pickClass.toUpperCase();
+            classSelect = pickClass.charAt(0);
         }
-        Player user = new Player(pickClass);
+        Player user = new Player(classSelect);
         Monster goblin = new Monster(15,3,"Boblin the Goblin");
         Monster orc = new Monster(25,5,"Gork the Orc");
         Monster minotaur = new Monster(30,7,"Midas the Minotaur");

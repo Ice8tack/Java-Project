@@ -5,9 +5,64 @@ public class Player{
     private int magicDamage = 7;
     private int manaRegen = 4;
     private int healthRegen = 0;
+    private int currentHealth;
+    private int currentMana;
+    private int potionCount = 1;
     
     public Player(char playerClassChar){
         setStats(playerClassChar);
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+    }
+    
+    public void usePotion()
+    {
+        if(potionCount >= 1)
+            {
+                rest();
+                System.out.print("You used a full restore potion. You no have 0 potions");
+                potionCount -= 1;
+            } else {
+                System.out.print("You have no remaining potions");
+            }
+    }
+    
+    public void rest()
+    {
+        currentHealth = maxHealth;
+        currentMana = maxMana;
+    }
+    
+    public void adjustHealth(int value)
+    {
+        currentHealth += value;
+    }
+    
+     public void adjustMana(int value)
+    {
+        currentMana += value;
+    }
+    
+    public void regenStats()
+    {
+        currentHealth += healthRegen;
+        currentMana += manaRegen;
+        if (currentHealth > maxHealth){
+                currentHealth = getMaxHealth();
+        }
+        if (currentMana > maxMana){
+                currentMana = getMaxMana();
+        }
+    }
+    
+    public int getCurrentHealth()
+    {
+        return currentHealth;
+    }
+    
+    public int getCurrentMana()
+    {
+        return currentMana;
     }
     
     public void setStats(char playerClassChar){
