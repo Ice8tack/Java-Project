@@ -8,23 +8,29 @@ public class MidtermProject
         return false;
     }
 
-    /*public static char playerChoice(char choice, int maxHealth, int attackDamage) //Need to pass player health, monster health, player dmg, and monster dmg in here as well
+    public static void shop()
     {
-    int doBattle; 
-    System.out.println("You encounter a creature before you and you go in and attack.");
-    while(maxHealth > 0 && monsterHealth > 0)
-    {
-    int playerTakenBattleDmg = maxHealth - monsterDamage;
-    int monsterTakenBattleDmg = monsterHealth - attackDamage;
-
-    if (maxHealth < 0 || monsterHealth < 0)
-    {
-    String battle = "over";
+        System.out.print("You stumble across a shop after defeating that nasty Orc. /nThe shop offers multiple goods that will help you on your journey.");
+        if (user.setStats() == 'R'){
+            System.out.println("You find that you have enough gold to buy 2 items, and you're able to steal a third.");
+        }
+        else{
+            System.out.println("You find that you have enough gold to buy 2 items");
+        }
     }
+    
+    public static void shopItems()
+    {
+        
+        int upgradedWeapon = 1; //more physical dmg
+        int armor = 1; //more hp regen 
+        int ring = 1; //increase mana 
+        int necklace = 1; //more mana regen
+        int shield = 1; //more hp
+        int dustyTome = 1; //more magic dmg
+        int potion = 1; //add to variable potionCount + 1
 
-    System.out.printf("After taking an attack, your current health is %d %n", playerTakenBattleDmg);
     }
-    }*/
 
     public static void printVitals(int playerHealth, int playerMana, Monster enemy){
         System.out.printf("You currently have %d health remaining, and %d mana remaining!%n",playerHealth,playerMana);
