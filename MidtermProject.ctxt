@@ -2,13 +2,14 @@
 comment0.target=MidtermProject
 comment1.params=a
 comment1.target=boolean\ isClassValid(char)
-comment2.params=playerHealth\ playerMana\ enemy
-comment2.target=void\ printVitals(int,\ int,\ Monster)
-comment2.text=public\ static\ char\ playerChoice(char\ choice,\ int\ maxHealth,\ int\ attackDamage)\ //Need\ to\ pass\ player\ health,\ monster\ health,\ player\ dmg,\ and\ monster\ dmg\ in\ here\ as\ well\r\n\ \ \ \ {\r\n\ \ \ \ int\ doBattle;\ \r\n\ \ \ \ System.out.println("You\ encounter\ a\ creature\ before\ you\ and\ you\ go\ in\ and\ attack.");\r\n\ \ \ \ while(maxHealth\ >\ 0\ &&\ monsterHealth\ >\ 0)\r\n\ \ \ \ {\r\n\ \ \ \ int\ playerTakenBattleDmg\ \=\ maxHealth\ -\ monsterDamage;\r\n\ \ \ \ int\ monsterTakenBattleDmg\ \=\ monsterHealth\ -\ attackDamage;\r\n\r\n\ \ \ \ if\ (maxHealth\ <\ 0\ ||\ monsterHealth\ <\ 0)\r\n\ \ \ \ {\r\n\ \ \ \ String\ battle\ \=\ "over";\r\n\ \ \ \ }\r\n\r\n\ \ \ \ System.out.printf("After\ taking\ an\ attack,\ your\ current\ health\ is\ %d\ %n",\ playerTakenBattleDmg);\r\n\ \ \ \ }\r\n}
-comment3.params=user\ enemy\ input
-comment3.target=void\ chooseBattleOption(Player,\ Monster,\ java.util.Scanner)
+comment2.params=input\ user
+comment2.target=void\ shop(java.util.Scanner,\ Player)
+comment3.params=playerHealth\ playerMana\ enemy
+comment3.target=void\ printVitals(int,\ int,\ Monster)
 comment4.params=user\ enemy\ input
-comment4.target=boolean\ doBattle(Player,\ Monster,\ java.util.Scanner)
-comment5.params=args
-comment5.target=void\ main(java.lang.String[])
-numComments=6
+comment4.target=void\ chooseBattleOption(Player,\ Monster,\ java.util.Scanner)
+comment5.params=user\ enemy\ input
+comment5.target=boolean\ doBattle(Player,\ Monster,\ java.util.Scanner)
+comment6.params=args
+comment6.target=void\ main(java.lang.String[])
+numComments=7

@@ -8,28 +8,65 @@ public class MidtermProject
         return false;
     }
 
-    public static void shop()
+    public static void shop(Scanner input, Player user)
     {
+        int itemsLeft;
         System.out.print("You stumble across a shop after defeating that nasty Orc. /nThe shop offers multiple goods that will help you on your journey.");
-        if (user.setStats() == 'R'){
+        if (user.getPlayerClass() == 'R'){
             System.out.println("You find that you have enough gold to buy 2 items, and you're able to steal a third.");
+            itemsLeft = 3;
         }
         else{
             System.out.println("You find that you have enough gold to buy 2 items");
+            itemsLeft = 2;
         }
-    }
-    
-    public static void shopItems()
-    {
         
-        int upgradedWeapon = 1; //more physical dmg
-        int armor = 1; //more hp regen 
-        int ring = 1; //increase mana 
-        int necklace = 1; //more mana regen
-        int shield = 1; //more hp
-        int dustyTome = 1; //more magic dmg
-        int potion = 1; //add to variable potionCount + 1
-
+        System.out.println("There's a shiny weapon lying "); //ADD DESCRIPTION LATER
+        
+        boolean[] items = {false, false, false, false, false, false, false};
+        
+        while (itemsLeft > 0){
+            String itemChoice = input.nextLine();
+            int itemChoiceNum = Integer.parseInt(itemChoice) - 1;
+            if(items[itemChoiceNum]){
+                System.out.println("Item is already gone, pick another item");
+            }
+            else{
+                System.out.println("You have picked up the item.");
+                items[itemChoiceNum] = true;
+                itemsLeft -= 1;
+            }
+        }
+        
+        if(items[0]){
+            user.addDMG(); //upgraded Weapon
+        }
+        if(items[1]){
+            //armor
+        }
+        if(items[2]){
+            //ring
+        }
+        if(items[3]){
+            //necklace
+        }
+        if(items[4]){
+            //shield
+        }
+        if(items[5]){
+            user.addMagicDMG(); //dustyTome
+        }
+        if(items[6]){
+            user.addPotion(); //potion
+        }
+        boolean upgradedWeapon = false; //more physical dmgn [0]
+        boolean armor = false; //more hp regen 
+        boolean ring = false; //increase mana 
+        boolean necklace = false; //more mana regen
+        boolean shield = false; //more hp
+        boolean dustyTome = false; //more magic dmg
+        boolean potion = false; //add to variable potionCount + 1 [6]
+        
     }
 
     public static void printVitals(int playerHealth, int playerMana, Monster enemy){

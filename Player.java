@@ -8,11 +8,17 @@ public class Player{
     private int currentHealth;
     private int currentMana;
     private int potionCount = 1;
+    private char playerClass; 
     
     public Player(char playerClassChar){
         setStats(playerClassChar);
+        playerClass = playerClassChar;
         currentHealth = maxHealth;
         currentMana = maxMana;
+    }
+    
+    public char getPlayerClass(){
+        return playerClass;
     }
     
     public void usePotion()
@@ -25,6 +31,21 @@ public class Player{
             } else {
                 System.out.println("You scramble for a potion and find none. You're open for attack.");
             }
+    }
+    
+    public void addPotion()
+    {
+        potionCount += 1;
+    }
+    
+    public void addDMG()
+    {
+        attackDamage += 1;
+    }
+    
+    public void addMagicDMG()
+    {
+        magicDamage += 2;
     }
     
     public void rest()
