@@ -26,8 +26,8 @@ public class Player{
         if(potionCount >= 1)
             {
                 rest();
-                System.out.printf("You used a full restore potion. You now have %d potions",potionCount);
                 potionCount -= 1;
+                System.out.printf("You used a full restore potion. You now have %d potions", potionCount);
             } else {
                 System.out.println("You scramble for a potion and find none. You're open for attack.");
             }
@@ -47,6 +47,26 @@ public class Player{
     {
         magicDamage += 2;
     }
+    
+    public void addMaxMana()
+    {
+        maxMana += 5;
+    } 
+    
+    public void addManaRegen()
+    {
+        manaRegen += 3;
+    }
+    
+    public void addHPRegen()
+    {
+        healthRegen += 2;
+    }
+    
+    public void addHP()
+    {
+        maxHealth += 5;
+    }    
     
     public void rest()
     {
@@ -89,7 +109,7 @@ public class Player{
     public void setStats(char playerClassChar){
         if( playerClassChar == 'W') //Wizard class
         {
-            maxHealth = 15;
+            maxHealth = 18;
             maxMana = 40;
             attackDamage = 3;
             magicDamage = 10;
