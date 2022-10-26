@@ -13,17 +13,18 @@ public class MidtermProject
         int itemsLeft;
         System.out.println("There's one more to kill. \nThe shop offers multiple goods that will help you do that.");
         System.out.println("There's a sharp sliver of steel lying against a wall near an armor stand, with a better looking piece of armor, it makes you jealous.");
-        System.out.println("Misunderstood jewelry lay on the table, a blue ring and a sapphire necklace.");
+        System.out.println("Misunderstood jewelry lay on the table, a blue ring, and a sapphire necklace.");
         System.out.println("On the wall to the right is a shield stronger than yourself. \nNear the edge of the clerk's counter is a dusty tome, and on the other side of the counter is a potion.");
         System.out.println("You stand there in the store, wondering what'll make you better."); //ADD DESCRIPTION LATER
         System.out.println("1: Weapon, 2: Armor, 3: Ring, 4: Necklace \n5: Shield, 6: Dusty Tome, 7: Potion.");
+        System.out.println("Pick your items carefully and one by one");
 
         if (user.getPlayerClass() == 'R'){
             System.out.println("You have enough coins to buy 2 items. The clerk doesn't seem to be very attentive.");
             itemsLeft = 3;
         }
         else{
-            System.out.println("You have enough coins to buy 2 items");
+            System.out.println("You have enough coins to buy 2 items.");
             itemsLeft = 2;
         }
 
@@ -90,7 +91,7 @@ public class MidtermProject
                 System.out.printf("%nYou magically harass %s for %d damage!%n",enemy.getName(),user.getMagicDamage());
                 user.adjustMana(-15);
             } else {
-                System.out.printf("%nThe magic fizzles. (15 Mana required for Magic)");
+                System.out.printf("%nThe magic fizzles. (15 Mana required for Magic)%n");
             }
         }
         if (playerBattleOption.equalsIgnoreCase("item")){
