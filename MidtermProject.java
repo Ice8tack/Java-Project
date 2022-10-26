@@ -16,7 +16,7 @@ public class MidtermProject
         System.out.println("Misunderstood jewelry lay on the table, a blue ring and a sapphire necklace.");
         System.out.println("On the wall to the right is a shield stronger than yourself. \nNear the edge of the clerk's counter is a dusty tome, and on the other side of the counter is a potion.");
         System.out.println("You stand there in the store, wondering what'll make you better."); //ADD DESCRIPTION LATER
-        System.out.println("1 is for the weapon, 2 is for the armor, 3 is for the ring, 4 is for the necklace \n5 is for the shield, 6 is for the dusty tome, and 7 is for the potion.");
+        System.out.println("1: Weapon, 2: Armor, 3: Ring, 4: Necklace \n5: Shield, 6: Dusty Tome, 7: Potion.");
 
         if (user.getPlayerClass() == 'R'){
             System.out.println("You have enough coins to buy 2 items. The clerk doesn't seem to be very attentive.");
@@ -30,9 +30,11 @@ public class MidtermProject
         boolean[] items = {false, false, false, false, false, false, false};
 
         while (itemsLeft > 0){
-            String itemChoice = input.nextLine();
-            int itemChoiceNum = Integer.parseInt(itemChoice) - 1;
-            if(items[itemChoiceNum]){
+            int itemChoiceNum = input.nextInt() - 1;
+            if(itemChoiceNum > 6){
+                System.out.println("You reach for what isn't there.");
+            }
+            else if(items[itemChoiceNum]){
                 System.out.println("Item is already gone, pick another item and keep track of your inventory.");
             }
             else{
@@ -43,7 +45,7 @@ public class MidtermProject
         }
 
         if(items[0]){
-            user.addDMG(); //upgraded Weapon,more physical dmgn [0]
+            user.addDMG(); //upgraded Weapon,more physical dmg [0]
         }
         if(items[1]){
             user.addHPRegen(); //armor, more hp regen
@@ -66,7 +68,7 @@ public class MidtermProject
     }
 
     public static void printVitals(int playerHealth, int playerMana, Monster enemy){
-        System.out.printf("You currently have %d health remaining, and %d mana remaining!%n",playerHealth,playerMana);
+        System.out.printf("%nYou currently have %d health remaining, and %d mana remaining!%n",playerHealth,playerMana);
         System.out.printf("%s currently has %d health remaining!%n",enemy.getName(),enemy.getCurrentHealth());
     }
 
@@ -80,15 +82,15 @@ public class MidtermProject
         }
         if (playerBattleOption.equalsIgnoreCase("attack")){
             user.attack(enemy);
-            System.out.printf("You harass %s for %d damage!%n",enemy.getName(),user.getAttackDamage());
+            System.out.printf("%nYou torment %s for %d damage!%n",enemy.getName(),user.getAttackDamage());
         }
         if (playerBattleOption.equalsIgnoreCase("magic")){
             if (user.getCurrentMana() > 14){
                 user.magic(enemy);
-                System.out.printf("You magically harass %s for %d damage!%n",enemy.getName(),user.getMagicDamage());
+                System.out.printf("%nYou magically harass %s for %d damage!%n",enemy.getName(),user.getMagicDamage());
                 user.adjustMana(-15);
             } else {
-                System.out.println("The magic fizzles. (15 Mana required for Magic)");
+                System.out.printf("%nThe magic fizzles. (15 Mana required for Magic)");
             }
         }
         if (playerBattleOption.equalsIgnoreCase("item")){
@@ -96,13 +98,13 @@ public class MidtermProject
         }
         if(playerBattleOption.equalsIgnoreCase("quit")){
             System.exit(0);
-            System.out.print("You have quit the game. Coward");
+            System.out.println("You have quit the game. Coward");
         }
     }
 
     public static boolean doBattle(Player user, Monster enemy, Scanner input){
         user.rest();
-        System.out.printf("%s looks pathetic.%n",enemy.getName());
+        System.out.printf("%s looks %s.%n",enemy.getName(),enemy.getDescription());
         while (user.getCurrentHealth() > 0 && enemy.getCurrentHealth() > 0){
             user.regenStats();
 
@@ -144,9 +146,11 @@ public class MidtermProject
             classSelect = pickClass.charAt(0);
         }
         Player user = new Player(classSelect);
-        Monster goblin = new Monster(15,3,"Boblin the Goblin","A muttering of frustration.");
-        Monster orc = new Monster(25,5,"Gork the Orc","Galumphing rage.");
-        Monster minotaur = new Monster(37,8,"Midas the Minotaur","He hit you where it hurts.");
+        Monster goblin = new Monster(15,3,"Boblin the Goblin","A muttering of frustration.","pathetic.");
+        Monster orc = new Monster(25,5,"Gork the Orc","Galumphing rage.","amped up and agitated.");
+        Monster minotaur = new Monster(37,8,"Midas the Minotaur","He hit you where it hurts.","vengeful");
+
+        System.out.printf("%s the murderer.%nThats you,%nThat's who you are.%nThey know that too.%n%nWandering the road between here and there%nA goblinoid%nIt's sifting the area%n",name);
 
         if (doBattle(user,goblin,input)){
             System.out.printf("A useless corpse. There's some blood with a little money \n ...%n%n");
@@ -155,6 +159,9 @@ public class MidtermProject
             input.close();
             return;
         }
+
+        System.out.printf("%nHere is always around.%nBut there, you're so close to there.%nA road here to there.%nNever can leave here even trying to get there%nno matter the there, it’s not here,%nnot yet…%n");
+        System.out.printf("%nYou find tents and supper%n\"%s, you did this.%nYour revenge stops here.\"%nGork doesn't like you.%n",name);
 
         if (doBattle(user,orc,input)){
             System.out.printf("If he didn't want to die then why was he mortal?. \nBetween here and there is a shop.  ..%n%n");
@@ -166,6 +173,8 @@ public class MidtermProject
 
         System.out.println("A shop for shopping and nothing else."); //can change this later, just wanted smth before the shop print out stuff
         shop(input, user);
+
+        System.out.printf("Here is now there%nMidas is right there,%nHe’s here with you.%n\"%s, why are you here?%nWhere’s my friends?%nThey were supposed to be here too.%n%nOh, that’s what you did.\"%n",name);
 
         if (doBattle(user,minotaur,input)){
             System.out.printf("You didn't win much, but at least they're dead.");

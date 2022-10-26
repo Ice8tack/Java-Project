@@ -4,13 +4,15 @@ public class Monster{
     private int attackDamage;
     private String name;
     private String attackDescription;
+    private String monsterDescription;
 
-    public Monster(int health, int damage, String n, String ad){
+    public Monster(int health, int damage, String n, String attackDescript, String descript){
         maxHealth = health;
         currentHealth = health;
         attackDamage = damage;
         name = n;
-        attackDescription = ad;
+        attackDescription = attackDescript;
+        monsterDescription = descript;
     }
 
     public int getMaxHealth(){
@@ -35,5 +37,9 @@ public class Monster{
     
     public void takeDamage(int value){
         currentHealth -=value;
+    }
+    
+    public String getDescription(){
+        return monsterDescription;
     }
 }

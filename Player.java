@@ -27,7 +27,7 @@ public class Player{
             {
                 rest();
                 potionCount -= 1;
-                System.out.printf("You used a full restore potion. You now have %d potions", potionCount);
+                System.out.printf("You used a full restore potion. You now have %d potions%n", potionCount);
             } else {
                 System.out.println("You scramble for a potion and find none. You're open for attack.");
             }
